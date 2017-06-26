@@ -18,8 +18,11 @@ namespace PlantVsZombie
         [SerializeField]
         private Animator animator;
 
+        private BoxCollider2D boxColider2d;
+
         private void Awake()
         {
+            boxColider2d = GetComponent<BoxCollider2D>();
         }
 
         // Use this for initialization
@@ -30,31 +33,20 @@ namespace PlantVsZombie
 
         private void Update()
         {
-            RaycastHit2D hit;
-            RaycastHit2D hit2d;
-
-            if (CurrentState == BasePlayerState.WALKING)
-            {
-                hit2d = Physics2D.Raycast(transform.position, Vector2.left, visionLength, raycastLayer.value);
-                Debug.DrawRay(transform.position, Vector3.left * visionLength, Color.green);
-                if (hit2d)
-                {
-                    Debug.Log("hit2d: " + hit2d.collider.name);
-                    SetPlayerAttacking();
-                }
-            }
         }
 
         protected override void SetPlayerWalking()
         {
             base.SetPlayerWalking();
             animator.SetBool("Walking", true);
+            boxColider2d.enabled = true;
         }
 
         protected override void SetPlayerAttacking()
         {
             base.SetPlayerAttacking();
             animator.SetBool("Walking", false);
+            boxColider2d.enabled = false;
         }
 
         protected override void SetPlayerIdle()
@@ -68,6 +60,15 @@ namespace PlantVsZombie
         {
             if (CurrentState == BasePlayerState.WALKING)
                 transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.tag == "Player")
+            {
+                Debug.Log("OnCollisionEnter2D: " + collision.collider.tag);
+                SetPlayerAttacking();
+            }
         }
     }
 }
