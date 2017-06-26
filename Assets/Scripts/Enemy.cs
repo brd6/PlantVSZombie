@@ -18,11 +18,18 @@ namespace PlantVsZombie
         [SerializeField]
         private Animator animator;
 
+        [SerializeField]
+        private SpriteRenderer spriteRenderer;
+
         private BoxCollider2D boxColider2d;
+
+        private Rigidbody2D rigidBody2D;
+
 
         private void Awake()
         {
             boxColider2d = GetComponent<BoxCollider2D>();
+            rigidBody2D = GetComponent<Rigidbody2D>();
         }
 
         // Use this for initialization
@@ -39,14 +46,15 @@ namespace PlantVsZombie
         {
             base.SetPlayerWalking();
             animator.SetBool("Walking", true);
-            boxColider2d.enabled = true;
+            //boxColider2d.enabled = true;
         }
 
         protected override void SetPlayerAttacking()
         {
             base.SetPlayerAttacking();
             animator.SetBool("Walking", false);
-            boxColider2d.enabled = false;
+            animator.SetBool("Attacking", true);
+            //boxColider2d.enabled = false;
         }
 
         protected override void SetPlayerIdle()
@@ -70,5 +78,44 @@ namespace PlantVsZombie
                 SetPlayerAttacking();
             }
         }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "Projectile")
+            {
+                LoseLife();
+            }
+        }
+
+        protected override void LoseLife()
+        {
+            base.LoseLife();
+            BlinkGameObject(0.03f);
+        }
+
+        void BlinkGameObject(float durationInSecond)
+        {
+            StartCoroutine(DoBlinks(durationInSecond, 0.06f));
+        }
+
+        IEnumerator DoBlinks(float durationInSecond, float blinkTime)
+        {
+            while (durationInSecond > 0f)
+            {
+                durationInSecond -= Time.deltaTime;
+                spriteRenderer.color = new Color(0.214f, 0.154f, 0.154f);
+                yield return new WaitForSeconds(blinkTime / 2);
+                spriteRenderer.color = Color.white;
+                yield return new WaitForSeconds(blinkTime);
+            }
+            spriteRenderer.color = Color.white;
+        }
+
+        protected override void SetPlayerDead()
+        {
+            base.SetPlayerDead();
+            Destroy(gameObject);
+        }
+
     }
 }

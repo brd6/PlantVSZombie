@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: d5b9a73e550e1954e95b62c8efcc4e21
-timeCreated: 1498474534
+timeCreated: 1498497627
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,9 +12,9 @@ TextureImporter:
     21300010: zombie_idle_1
     21300012: zombie_idle_2
     21300014: zombie_idle_3
-    21300016: players_8
-    21300018: players_9
-    21300020: players_10
+    21300016: zombie_attack_0
+    21300018: zombie_attack_1
+    21300020: zombie_attack_2
     21300022: players_11
     21300024: players_12
     21300026: players_13
@@ -24,9 +24,9 @@ TextureImporter:
     21300034: players_17
     21300036: players_18
     21300038: players_19
-    21300040: players_20
-    21300042: players_21
-    21300044: players_22
+    21300040: zombie_attack_3
+    21300042: zombie_attack_4
+    21300044: zombie_attack_5
     21300046: zombie_walk_0
     21300048: zombie_walk_1
     21300050: zombie_walk_2
@@ -47,9 +47,9 @@ TextureImporter:
     21300080: players_40
     21300082: players_41
     21300084: players_42
-    21300086: players_43
-    21300088: players_44
-    21300090: players_45
+    21300086: Maggot_idle_0
+    21300088: Maggot_idle_1
+    21300090: Maggot_idle_2
     21300092: players_46
     21300094: players_47
     21300096: players_48
@@ -301,12 +301,12 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: players_8
+      name: zombie_attack_0
       rect:
         serializedVersion: 2
         x: 419
         y: 623
-        width: 21
+        width: 24
         height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -314,26 +314,26 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: players_9
+      name: zombie_attack_1
       rect:
         serializedVersion: 2
         x: 457
         y: 623
-        width: 23
-        height: 34
+        width: 24
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: players_10
+      name: zombie_attack_2
       rect:
         serializedVersion: 2
         x: 493
-        y: 623
+        y: 624
         width: 24
-        height: 33
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -457,12 +457,12 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: players_20
+      name: zombie_attack_3
       rect:
         serializedVersion: 2
         x: 419
         y: 586
-        width: 21
+        width: 24
         height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -470,26 +470,26 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: players_21
+      name: zombie_attack_4
       rect:
         serializedVersion: 2
         x: 454
         y: 586
-        width: 23
-        height: 34
+        width: 24
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: players_22
+      name: zombie_attack_5
       rect:
         serializedVersion: 2
         x: 492
         y: 586
         width: 24
-        height: 32
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -756,7 +756,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: players_43
+      name: Maggot_idle_0
       rect:
         serializedVersion: 2
         x: 42
@@ -769,12 +769,12 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: players_44
+      name: Maggot_idle_1
       rect:
         serializedVersion: 2
         x: 117
         y: 412
-        width: 57
+        width: 58
         height: 23
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -782,7 +782,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: players_45
+      name: Maggot_idle_2
       rect:
         serializedVersion: 2
         x: 191

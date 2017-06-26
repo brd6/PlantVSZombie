@@ -7,10 +7,13 @@ namespace PlantVsZombie
     public class BasePlayer : MonoBehaviour
     {
         [SerializeField]
-        protected int life = 10;
+        protected float life = 10;
 
         [SerializeField]
         private BasePlayerState state;
+
+        [SerializeField]
+        private float loseLifeAmong = 1;
 
         protected BasePlayerState CurrentState { get; private set; }
 
@@ -52,5 +55,14 @@ namespace PlantVsZombie
         }
 
         #endregion
+
+        protected virtual void LoseLife()
+        {
+            if (life <= 0)
+                return;
+            life -= loseLifeAmong;
+            if (life <= 0)
+                SetPlayerDead();
+        }
     }
 }
