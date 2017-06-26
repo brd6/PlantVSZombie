@@ -46,7 +46,7 @@ namespace PlantVsZombie
         {
             base.SetPlayerWalking();
             animator.SetBool("Walking", true);
-            //boxColider2d.enabled = true;
+            animator.SetBool("Attacking", false);
         }
 
         protected override void SetPlayerAttacking()
@@ -54,7 +54,6 @@ namespace PlantVsZombie
             base.SetPlayerAttacking();
             animator.SetBool("Walking", false);
             animator.SetBool("Attacking", true);
-            //boxColider2d.enabled = false;
         }
 
         protected override void SetPlayerIdle()
@@ -74,8 +73,15 @@ namespace PlantVsZombie
         {
             if (collision.collider.tag == "Player")
             {
-                Debug.Log("OnCollisionEnter2D: " + collision.collider.tag);
                 SetPlayerAttacking();
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if (collision.collider.tag == "Player")
+            {
+                SetPlayerWalking();
             }
         }
 
