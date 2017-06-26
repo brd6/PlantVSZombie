@@ -83,6 +83,10 @@ namespace PlantVsZombie
             {
                 SetPlayerWalking();
             }
+            else if (collision.collider.tag == "DeadZone")
+            {
+                Destroy(gameObject, 5);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -90,6 +94,10 @@ namespace PlantVsZombie
             if (collision.tag == "Projectile")
             {
                 LoseLife();
+            }
+            else if (collision.tag == "DeadZone")
+            {
+                Destroy(gameObject, 5);
             }
         }
 

@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using Common;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace PlantVsZombie
 {
@@ -22,7 +24,20 @@ namespace PlantVsZombie
             SetPlayerIdle();
         }
 
-#region StateManager
+        private void Start()
+        {
+            GameStateManager.StateChangedEvent += StateChanged;
+        }
+
+        private void StateChanged(GameState newState)
+        {
+            if (newState == GameState.GAMEOVER)
+            {
+
+            }
+        }
+
+        #region StateManager
         protected virtual void SetPlayerDead()
         {
             SetState(BasePlayerState.DEAD);

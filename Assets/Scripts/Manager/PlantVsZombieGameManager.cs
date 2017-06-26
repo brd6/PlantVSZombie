@@ -36,6 +36,7 @@ namespace PlantVsZombie
         public override void SetGameLauncher()
         {
             base.SetGameLauncher();
+            Time.timeScale = 1;
             SceneManager.LoadScene(gamePlaySceneName);
             SetGameRunning();
         }
@@ -43,6 +44,12 @@ namespace PlantVsZombie
         public override void SetGameRunning()
         {
             base.SetGameRunning();
+        }
+
+        public override void SetGameover()
+        {
+            base.SetGameover();
+            Time.timeScale = 0;
         }
 
         public void QuitGame()
