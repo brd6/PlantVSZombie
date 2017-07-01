@@ -19,12 +19,14 @@ namespace PlantVsZombie
         private int currentPlayerTypeSelected;
 
         // Use this for initialization
-        void Start() {
+        void Start()
+        {
             currentPlayerTypeSelected = -1;
         }
 
         // Update is called once per frame
-        void Update() {
+        void Update()
+        {
 
         }
 
@@ -37,11 +39,17 @@ namespace PlantVsZombie
         {
             if (currentPlayerTypeSelected < 0)
                 return;
+            if (gameManager.GetMoney() - 50 < 1)
+                return;
             var player = Instantiate(playerPrefabs[currentPlayerTypeSelected], playersGroup.transform);
             var button = buttonRefered.GetComponent<Button>();
             player.transform.position = button.transform.position;
             player.GetComponent<Player>().SetButtonRefered(button);
             button.interactable = false;
+            gameManager.DecreaseMoney(50);
+            if (gameManager.GetMoney() - 50 < 1)
+                button.interactable = false;
+            currentPlayerTypeSelected = -1;
         }
 
     }

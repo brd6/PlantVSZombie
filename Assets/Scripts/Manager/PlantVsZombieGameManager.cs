@@ -15,6 +15,15 @@ namespace PlantVsZombie
         [SerializeField]
         private string gamePlaySceneName = "GamePlay";
 
+        [SerializeField]
+        private int money = 200;
+
+        [SerializeField]
+        private GameObject moneyUI;
+
+        public delegate void MoneyChangedDelegate(int money);
+        public static event MoneyChangedDelegate MoneyChangedEvent;
+
         protected override void Start()
         {
             base.Start();
@@ -72,6 +81,36 @@ namespace PlantVsZombie
             {
                 QuitGame();
             }
+        }
+
+        public int GetMoney()
+        {
+            return money;
+        }
+
+        public void DecreaseMoney(int amont)
+        {
+            money -= amont;
+            InvokeMoneyChangedEvent(money);
+        }
+
+        public void IncreaseMoney(int amont)
+        {
+            money += amont;
+            InvokeMoneyChangedEvent(money);
+        }
+
+        private void InvokeMoneyChangedEvent(int money)
+        {
+            if (MoneyChangedEvent != null)
+            {
+                MoneyChangedEvent(money);
+            }
+        }
+
+        public GameObject GetMoneyUI()
+        {
+            return moneyUI;
         }
 
     }

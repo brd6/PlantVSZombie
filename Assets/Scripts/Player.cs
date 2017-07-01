@@ -34,9 +34,28 @@ namespace PlantVsZombie
         [SerializeField]
         private Button buttonRefered;
 
+        [SerializeField]
+        private float minTimeMoneyGenerator = 6;
+
+        [SerializeField]
+        private float maxTimeMoneyGenerator = 10;
+
+        [SerializeField]
+        private int moneyIncreaseAmont = 5;
+
+        [SerializeField]
+        private GameObject moneyIconPrefab;
+
+        private bool isGeneratedMoney = false;
+
+        private PlantVsZombieGameManager gameManager;
+
+
         // Use this for initialization
         void Start()
         {
+            gameManager = ((PlantVsZombieGameManager)(PlantVsZombieGameManager.Instance));
+
             SetPlayerIdle();
         }
 
@@ -51,6 +70,8 @@ namespace PlantVsZombie
             {
                 ShootEnemy();
             }
+
+            GenerateMoney();
 
             //if (CurrentState == BasePlayerState.IDLE)
             //{
@@ -145,6 +166,29 @@ namespace PlantVsZombie
         public void SetButtonRefered(Button button)
         {
             buttonRefered = button;
+        }
+
+        private void GenerateMoney()
+        {
+            if (isGeneratedMoney)
+                return;
+            isGeneratedMoney = true;
+            StartCoroutine(moneyGeneratorCoroutine(Random.Range(minTimeMoneyGenerator, maxTimeMoneyGenerator)));
+        }
+
+        IEnumerator moneyGeneratorCoroutine(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            var moneyIcon = Instantiate(moneyIconPrefab, transform.position, transform.rotation);
+            iTween.MoveTo(moneyIcon, iTween.Hash(
+                "position", gameManager.GetMoneyUI().transform.position,
+                "time", 0.8f,
+                "easetype", iTween.EaseType.easeOutQuad,
+                "oncomplete", "DestroyIcon",
+                "oncompletetarget", moneyIcon.gameObject,
+                "oncompleteparams", moneyIncreaseAmont
+                ));
+            isGeneratedMoney = false;
         }
 
     }

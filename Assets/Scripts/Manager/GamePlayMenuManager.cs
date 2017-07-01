@@ -2,6 +2,7 @@
 using System.Collections;
 using Common;
 using UnityEngine.UI;
+using System;
 
 namespace PlantVsZombie
 {
@@ -11,64 +12,50 @@ namespace PlantVsZombie
         private PlantVsZombieGameManager gameManager;
 
         [SerializeField]
-        private Text currentScoreText;
+        private Text currentMoneyText;
 
-        [SerializeField]
-        private Text bestScoreText;
-
-        [SerializeField]
-        private GameObject popupPause;
-
-        [SerializeField]
-        private GameObject popupGameOver;
-
-        [SerializeField]
-        private GameObject popupWin;
-
-        [SerializeField]
-        private GameObject popupBG;
 
         private void Start()
         {
             gameManager = ((PlantVsZombieGameManager)(PlantVsZombieGameManager.Instance));
             GameStateManager.StateChangedEvent += StateChanged;
-            //Score.ScoreChangedEvent += ScoreChanged;
-            UpdateScoreTexts();
+            PlantVsZombieGameManager.MoneyChangedEvent += MoneyChangedEvent;
+            //Score.ScoreChangedEvent += MoneyChanged;
+        }
+
+        private void MoneyChangedEvent(int money)
+        {
+            UpdateMoneyTexts();
         }
 
         private void StateChanged(GameState newState)
         {
-            if (newState == GameState.GAMEOVER)
+            if (newState == GameState.RUNNING)
             {
-                popupBG.SetActive(true);
+                UpdateMoneyTexts();
             }
         }
 
-        private void ScoreChanged()
+        private void UpdateMoneyTexts()
         {
-            UpdateScoreTexts();
-        }
-
-        private void UpdateScoreTexts()
-        {
-            //currentScoreText.text = gameManager.score.currentScore.ToString();
-            //bestScoreText.text = gameManager.score.bestScore.ToString();
+            currentMoneyText.text = gameManager.GetMoney().ToString();
+            Debug.Log("UpdateMoneyTexts: " + currentMoneyText.text);
         }
 
         public void PauseButtonAction()
         {
-            if (!popupBG.activeSelf)
-            {
-                popupBG.SetActive(true);
-                gameManager.SetGamePause();
-            }
+            //if (!popupBG.activeSelf)
+            //{
+            //    popupBG.SetActive(true);
+            //    gameManager.SetGamePause();
+            //}
         }
 
         public void ContinueButtonAction()
         {
-            gameManager.SetGameRunning();
-            ClosePopupAction(popupPause);
-            ClosePopupAction(popupWin);
+            //gameManager.SetGameRunning();
+            //ClosePopupAction(popupPause);
+            //ClosePopupAction(popupWin);
         }
 
         public void RestartButtonAction()
@@ -83,14 +70,15 @@ namespace PlantVsZombie
 
         public void ClosePopupAction(GameObject popup)
         {
-            popupBG.SetActive(false);
-            popup.SetActive(false);
+            //popupBG.SetActive(false);
+            //popup.SetActive(false);
         }
 
         public void OnDestroy()
         {
             //Score.ScoreChangedEvent -= ScoreChanged;
             GameStateManager.StateChangedEvent -= StateChanged;
+            PlantVsZombieGameManager.MoneyChangedEvent -= MoneyChangedEvent;
 
         }
     }
