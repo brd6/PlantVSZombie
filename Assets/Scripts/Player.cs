@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PlantVsZombie
 {
@@ -29,6 +30,9 @@ namespace PlantVsZombie
 
         [SerializeField]
         private bool isSpawning = false;
+
+        [SerializeField]
+        private Button buttonRefered;
 
         // Use this for initialization
         void Start()
@@ -134,7 +138,13 @@ namespace PlantVsZombie
         protected override void SetPlayerDead()
         {
             base.SetPlayerDead();
+            buttonRefered.interactable = true;
             Destroy(gameObject);
+        }
+
+        public void SetButtonRefered(Button button)
+        {
+            buttonRefered = button;
         }
 
     }
