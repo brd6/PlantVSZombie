@@ -126,7 +126,8 @@ namespace PlantVsZombie
             Debug.Log("Player - OnCollisionStay2D : " + collision.collider.tag);
             if (collision.collider.tag == "Zombie")
             {
-                LoseLife();
+                if (Random.Range(0, 2) % 2 == 0)
+                    LoseLife();
             }
         }
 
@@ -173,10 +174,10 @@ namespace PlantVsZombie
             if (isGeneratedMoney)
                 return;
             isGeneratedMoney = true;
-            StartCoroutine(moneyGeneratorCoroutine(Random.Range(minTimeMoneyGenerator, maxTimeMoneyGenerator)));
+            StartCoroutine(MoneyGeneratorCoroutine(Random.Range(minTimeMoneyGenerator, maxTimeMoneyGenerator)));
         }
 
-        IEnumerator moneyGeneratorCoroutine(float seconds)
+        IEnumerator MoneyGeneratorCoroutine(float seconds)
         {
             yield return new WaitForSeconds(seconds);
             var moneyIcon = Instantiate(moneyIconPrefab, transform.position, transform.rotation);

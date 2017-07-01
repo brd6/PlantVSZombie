@@ -39,7 +39,7 @@ namespace PlantVsZombie
         {
             if (currentPlayerTypeSelected < 0)
                 return;
-            if (gameManager.GetMoney() - 50 < 1)
+            if (gameManager.GetMoney() - 50 < 0)
                 return;
             var player = Instantiate(playerPrefabs[currentPlayerTypeSelected], playersGroup.transform);
             var button = buttonRefered.GetComponent<Button>();
@@ -47,7 +47,7 @@ namespace PlantVsZombie
             player.GetComponent<Player>().SetButtonRefered(button);
             button.interactable = false;
             gameManager.DecreaseMoney(50);
-            if (gameManager.GetMoney() - 50 < 1)
+            if (gameManager.GetMoney() - 50 < 0)
                 button.interactable = false;
             currentPlayerTypeSelected = -1;
         }

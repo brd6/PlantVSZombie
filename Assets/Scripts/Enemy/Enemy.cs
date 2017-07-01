@@ -10,9 +10,6 @@ namespace PlantVsZombie
         private float moveSpeed = 0.38f;
 
         [SerializeField]
-        private float visionLength = 0.57f;
-
-        [SerializeField]
         private LayerMask raycastLayer;
 
         [SerializeField]

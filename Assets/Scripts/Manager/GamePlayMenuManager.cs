@@ -14,6 +14,9 @@ namespace PlantVsZombie
         [SerializeField]
         private Text currentMoneyText;
 
+        [SerializeField]
+        private GameObject gameOverPanel;
+
 
         private void Start()
         {
@@ -33,6 +36,14 @@ namespace PlantVsZombie
             if (newState == GameState.RUNNING)
             {
                 UpdateMoneyTexts();
+            }
+            else if (newState == GameState.GAMEOVER)
+            {
+                gameOverPanel.SetActive(true);
+            }
+            else
+            {
+                gameOverPanel.SetActive(false);
             }
         }
 
